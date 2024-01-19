@@ -41,10 +41,15 @@ namespace ECommerceAPI.Controllers
         [HttpPost]
         public IActionResult Insert([FromBody]User user)
         {
-            _repository.Insert(user);
-
-
-            return Ok(user);
+            try
+            {
+                _repository.Insert(user);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
         }
 
