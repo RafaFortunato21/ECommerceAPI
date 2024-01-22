@@ -95,14 +95,18 @@ namespace ECommerceAPI.Repositories
                 //Verificação do Endereço de Entrega
                 if (usuario.EnderecosEntrega.SingleOrDefault(e => e.Id == endereco.Id) == null)
                     usuario.EnderecosEntrega.Add(endereco);
+                
+                if (departamento != null)
+                {
+                    if (usuario.Departamentos.SingleOrDefault(a => a.Id == departamento.Id) == null)
+                        usuario.Departamentos.Add(departamento);
+                }
 
-                if (usuario.Departamentos.FirstOrDefault(departamento) != null)
-                    usuario.Departamentos.Add(departamento);
 
 
                 return usuario;
 
-            }, new {Id = userId});
+            }, new { Id = userId });
 
             return usuarios.SingleOrDefault();
         }
